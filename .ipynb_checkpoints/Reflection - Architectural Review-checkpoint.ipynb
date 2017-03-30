@@ -36,7 +36,7 @@
     "We got quick and simple answers on our technical questions, e.g. flask is better than django because ninjas know it better than others. \n",
     "We brought in a document with data categories, and flow diagrams for our project. People changed our flow diagram and marked it up, we were able to get that feedback directly. We also now have that feedback concretely to refer back to. \n",
     "For the ethical component, people got hung up on the data. We heard “if the data is corrupt, and you have no other, there is not much you can do” multiple times. We could have given more context prior to the review by assigning some readings, so that they would have had more time to prepare more constructive feedback. \n",
-    "In terms of timing we had a timer in front of us and ensured that we stuck to our schedule so we were very satisfied with how much information we were able to gather in our given time frame. "
+    "In terms of timing we had a timer in front of us and ensured that we stuck to our schedule so we were very satisfied with how much information we were able to gather in our given time frame. At the next review, we want to provide readings beforehand so that our friends can give constructive feedback. Whether it be technical or ethical questions, both deserve some substantial context. We found that since we didn’t do that, the feedback for the ethical question was not very useful. "
    ]
   }
  ],
