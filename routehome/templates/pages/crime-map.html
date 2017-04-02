@@ -1,0 +1,16 @@
+<h1>Route Data</h1>
+<ul>
+  <li>{{location_a}}</li>
+  <li>{{location_b}}</li>
+  <li>{{scared_level}}</li>
+</ul>
+
+
+<h1>Crimes On this Street ({{location_a}})</h1>
+<ul>
+  {% for crime in crimes %}
+    <li>
+      {{crime}} - {{crime.offense_description}}
+    </li>
+  {% endfor %}
+</ul>

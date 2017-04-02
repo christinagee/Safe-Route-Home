@@ -1,0 +1,8 @@
+appdirs==1.4.3
+diff-match-patch==20121119
+Django==1.10.6
+django-import-export==0.5.1
+packaging==16.8
+pyparsing==2.2.0
+six==1.10.0
+tablib==0.11.4
