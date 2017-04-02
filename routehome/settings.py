@@ -52,13 +52,13 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'RouteHome.urls'
+ROOT_URLCONF = 'routehome.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, "RouteHome", "templates"),
+            os.path.join(BASE_DIR, "routehome", "templates"),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'RouteHome.wsgi.application'
+WSGI_APPLICATION = 'routehome.wsgi.application'
 
 
 # Database
