@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head >
+  <link rel="stylesheet" type="text/css" href="static/css/home.css">
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <h1> Route Home </h1>
+ </div>
+</header>
+
+<form>
+  <ul>
+    <p>
+      Start Location <br>
+      <input type="text" name="start"><br>
+    </p>
+    <p>
+      End Location<br>
+      <input type="text" name="end"><br>
+    </p>
+</ul>
+</form>
+
+
+<div class= 'indicators'>
+  <p>Which events would you like to avoid? </p>
+  <p>
+    <input type="checkbox" id="assault" value="assault">
+    <label for="assault">Assault</label>
+  </p>
+  <p>
+    <input type="checkbox" id="kidnap" value="kidnap">
+    <label for="kidnap">Kidnapping</label>
+  </p>
+  <p>
+    <input type="checkbox" id="caraccident" value="caraccident">
+    <label for="caraccident">Vehicular Accidents</label>
+  </p>
+  <p>
+    <input type="checkbox" id="murder" value="murder">
+    <label for="murder">Murder</label>
+  </p>
+  <p>
+    Radius to avoid this (feet)<br>
+    <input type="number" name="radius">
+  </p>
+</div>
+
+<footer  action ="/login", method = 'get'>
+    <input type="submit" value="Submit" name="Submit">
+</footer>
+
+</div>
+
+</body>
+</html>

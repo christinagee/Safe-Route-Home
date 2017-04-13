@@ -1,47 +1,36 @@
 
 header {
     font-family: 'Arial', Sans-serif;
-    background-color: turquoise;
-    text-align: center;
+    color: grey;
+    padding: 20px 0;
 }
 
-.jumbotron{
+header .row {
   display: flex;
   align-items: center;
+}
+
+header h1 {
+  font-weight: 700;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+header p {
+  padding: 0 20px;
+  margin: 0;
+}
+
+.jumbotron {
+  display: flex;
+  align-items: center;
+  background-image: url('https://c1.staticflickr.com/5/4135/4792820945_09601f93f6_b.jpg');
   background-size: cover;
   color: :#ffffff;
-  height: 700px;
+  height: 500px;
   text-shadow: 0.25px 0.25px 0.25px #000000;
-}
-
-form {
-  line-height: 150%;
-  font-family: 'Arial', Sans-serif;
-  float: left;
-  max-width: 160px;
-  margin: 0;
-  padding: 1em;
-}
-
-form ul {
-    list-style-type: none;
-    padding: 10;
-}
-
-form ul a {
-    text-decoration: none;
-}
-
-div.indicators {
-    margin-left: 300px;
-    padding: 2em;
-    overflow: hidden;
-}
-
-h1{
-  font-family: 'Arial', Sans-serif;
-}
-
-p{
-  font-family: 'Arial', Sans-serif;
 }
