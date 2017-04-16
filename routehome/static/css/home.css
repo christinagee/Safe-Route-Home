@@ -28,9 +28,14 @@ header p {
 .jumbotron {
   display: flex;
   align-items: center;
-  background-image: url('https://c1.staticflickr.com/5/4135/4792820945_09601f93f6_b.jpg');
+  background-image: url('https://c1.staticflickr.com/2/1256/4723264284_34c218968a_b.jpg');
   background-size: cover;
   color: :#ffffff;
   height: 500px;
   text-shadow: 0.25px 0.25px 0.25px #000000;
+}
+
+.jumbotron h4 {
+  font-family: 'Arial', Sans-serif;
+  color: white;
 }

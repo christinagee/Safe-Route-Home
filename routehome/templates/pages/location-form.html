@@ -26,56 +26,41 @@
 </header>
 
 <section class='jumbotron'>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-6">
-          <form method='GET' action='/map/'>
-          <div class="form-group">
-            <label for="startLocation"><h4>Start Location</h4></label>
-            <input type="text" class="form-control" name='location_a' placeholder="Location A">
+  <div class='container'>
+    <div class='row'>
+      <form method='GET' action='/map/'>
+        <div class="form-group">
+          <div class='col-sm-5'>
+            <label for="startLocation"></label>
+            <input type="text" class="form-control" name='location_a' placeholder="Start Location">
+            <label for="endLocation"></label>
+            <input type="text" class="form-control" name='location_b' placeholder="End Location">
           </div>
-        </form>
-          <div class="form-group">
-            <label for="endLocation"><h4>End Location</h4></label>
-            <input type="text" class="form-control" name='location_b' placeholder="Location B">
+          <div class='col-sm-2'>
+          </div>
+          <div class='col-sm-5'>
+
           </div>
         </div>
-        <div clas='col-xs-6'>
-          <div class="form-group">
-             <label for="avoided"><h4>Events I Would Like To Avoid</h4></label>
-               <p>
-                 <input type="checkbox" id="assault" value="assault">
-                 <label for="assault">Assault</label>
-               </p>
-               <p>
-                 <input type="checkbox" id="kidnap" value="kidnap">
-                 <label for="kidnap">Kidnapping</label>
-               </p>
-               <p>
-                 <input type="checkbox" id="caraccident" value="caraccident">
-                 <label for="caraccident">Vehicular Accidents</label>
-               </p>
-               <p>
-                 <input type="checkbox" id="murder" value="murder">
-                 <label for="murder">Murder</label>
-               </p>
-           </div>
-        </div>
-      </div>
+
+      </form>
+    </div>
+  </div>
 </section>
+
 
         <div class="col-xs-8 col-xs-offset-2 text-center">
 
           <form method='GET' action='/map/'>
 
             <div class="form-group">
-              <label for="startLocation"><h4>Start Location</h4></label>
-              <input type="text" class="form-control" name='location_a' placeholder="Location A">
+              <label for="startLocation"></label>
+              <input type="text" class="form-control" name='location_a' placeholder="Start Location">
             </div>
 
             <div class="form-group">
-              <label for="endLocation"><h4>End Location</h4></label>
-              <input type="text" class="form-control" name='location_b' placeholder="Location B">
+              <label for="endLocation"></label>
+              <input type="text" class="form-control" name='location_b' placeholder="End Location">
             </div>
 
             <div class="form-group">
