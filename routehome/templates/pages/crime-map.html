@@ -9,7 +9,7 @@
   <meta name="author" content="SitePoint">
 
   <link rel="stylesheet" type='text/css' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="static/css/map.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/map.css">
 </head>
 
 <body>
@@ -27,13 +27,12 @@
   <ul>
     <li>{{location_a}}</li>
     <li>{{location_b}}</li>
-    <li>{{scared_level}}</li>
   </ul>
-  <h1>Crimes On this Street ({{location_a}})</h1>
+  <h1>Crimes Avoided ({{location_a}})</h1>
   <ul>
     {% for crime in crimes %}
       <li>
-        {{crime}} - {{crime.offense_description}}
+        {{crime}} - {{crime.offense_code}}
       </li>
     {% endfor %}
   </ul>

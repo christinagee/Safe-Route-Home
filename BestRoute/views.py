@@ -22,13 +22,19 @@ def crime_map(request):
     # Takes in URL params passed from locataion_form
     location_a = request.GET.get('location_a', '')
     location_b = request.GET.get('location_b', '')
-    scared_level = request.GET.get('scared_level', '')
+    assault = request.GET.get('assault', False)
+    kidnap = request.GET.get('kidnap', False)
+    caraccident = request.GET.get('caraccident', False)
+    murder = request.GET.get('murder', False)
+    crimes = []
+    if kidnap:
+        kidnap = True
+        crimes = CrimeDataPoint.objects.all().filter(offense_description__contains='kidnap')
 
     # This is an example of a Django Query with a filter
     # .order_by(month) < You can do things like this
-    crimes = CrimeDataPoint.objects.all().filter(street=location_a)
+    # crimes = CrimeDataPoint.objects.all().filter(street=location_a)
     # PUT ALL OF YOUR DATA ANALYSIS HERE
-    #
     #
     #
 
@@ -40,7 +46,7 @@ def crime_map(request):
         # first one is for the tempalte, second one is defined in your view...
         'location_a': location_a,
         'location_b': location_b,
-        'scared_level': scared_level,
+        'check_values': assault,
         'crimes': crimes
     }
     # This renders our the crime-map.html file with all of the defined context

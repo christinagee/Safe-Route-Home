@@ -9,7 +9,7 @@
   <meta name="author" content="SitePoint">
 
   <link rel="stylesheet" type='text/css' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="static/css/home.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/home.css">
 </head>
 
 <body>
@@ -27,12 +27,13 @@
 
 <section class='jumbotron'>
   <div class='container'>
-    <form method='GET' action='/map'>
+    <form method='GET' action='/map/'>
       <div class="form-group">
         <div class='row'>
           <div class='col-sm-5'>
             <label for="startLocation"></label>
             <input type="text" class="form-control" name='location_a' placeholder="Start Location">
+            <br>
             <label for="endLocation"></label>
             <input type="text" class="form-control" name='location_b' placeholder="End Location">
           </div>
@@ -41,13 +42,13 @@
           <div class='col-sm-5'>
             <h4><center> Events To Avoid </center></h4>
             <p>
-              <input type="checkbox" id="assault" value="assault">
+              <input type="checkbox" name="assault" >
               <label for="assault">Assault</label>
-              <input type="checkbox" id="kidnap" value="kidnap">
+              <input type="checkbox" name="kidnap" >
               <label for="kidnap">Kidnapping</label>
-              <input type="checkbox" id="caraccident" value="caraccident">
+              <input type="checkbox" name="caraccident">
               <label for="caraccident">Vehicular Accidents</label>
-              <input type="checkbox" id="murder" value="murder">
+              <input type="checkbox" name="murder">
               <label for="murder">Murder</label>
             </p>
           </div>

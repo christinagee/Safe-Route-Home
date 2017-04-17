@@ -13,7 +13,7 @@ class CrimeDataPoint(models.Model):
         blank=True,
         null=True
     )
-    offense_codd = models.IntegerField(
+    offense_code = models.IntegerField(
         'OFFENSE CODE',
         blank=True,
         null=True
