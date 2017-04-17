@@ -1,4 +1,3 @@
-
 header {
     font-family: 'Arial', Sans-serif;
     color: grey;
@@ -31,11 +30,21 @@ header p {
   background-image: url('https://c1.staticflickr.com/2/1256/4723264284_34c218968a_b.jpg');
   background-size: cover;
   color: :#ffffff;
-  height: 500px;
+  height: 700px;
   text-shadow: 0.25px 0.25px 0.25px #000000;
 }
 
 .jumbotron h4 {
   font-family: 'Arial', Sans-serif;
   color: white;
+}
+
+.jumbotron p {
+  font-family: 'Arial', Sans-serif;
+  color: white;
+}
+
+#homebtn {
+  display: block;;
+  width: 200px;
 }
