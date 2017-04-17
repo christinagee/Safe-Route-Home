@@ -26,10 +26,28 @@ def crime_map(request):
     kidnap = request.GET.get('kidnap', False)
     caraccident = request.GET.get('caraccident', False)
     murder = request.GET.get('murder', False)
-    crimes = []
-    if kidnap:
-        kidnap = True
-        crimes = CrimeDataPoint.objects.all().filter(offense_description__contains='kidnap')
+
+
+    crimes = CrimeDataPoint.objects.all()
+    # object code or i contain
+    # object_code__gte = 8000
+    # object_code_description__icontains = 'kidnap'
+    jsonObject = {}
+    jsonObject['routeControlPointCollection'] = []
+    # jsonObject['routeControlPointCollection'].append('sdfsd')
+    for crime in crimes:
+        json_entry = {
+            'lat': crime.latitude,
+            'long': crime.longitude,
+            'weight': 5,
+            'radius': 2
+        }
+        jsonObject['routeControlPointCollection'].append(json_entry)
+    print jsonObject
+
+    # FrankyMagicFunction(location_a, location_b, jsonObject)
+    # Take what Frnaky gives us ... parse it and then pass it to the template
+
 
     # This is an example of a Django Query with a filter
     # .order_by(month) < You can do things like this
@@ -47,7 +65,7 @@ def crime_map(request):
         'location_a': location_a,
         'location_b': location_b,
         'check_values': assault,
-        'crimes': crimes
+        'crimes': []
     }
     # This renders our the crime-map.html file with all of the defined context
     # variables
