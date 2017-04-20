@@ -20,13 +20,13 @@ class Send_Data:
 
 
     def Data(self):
-        self.data={}
+        self.data = {}
         self.data['locations'] = [self.start, self.end]
         self.Options()
         self.data['options']= self.options
 
     def Options(self):
-        self.options ={}
+        self.options = {}
         self.options['avoids'] = []
         self.options['avoidTimedConditions'] = False
         self.options['doReverseGeocode'] = True

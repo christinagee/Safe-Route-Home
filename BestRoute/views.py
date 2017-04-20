@@ -33,7 +33,7 @@ def crime_map(request):
     murder = request.GET.get('murder', False)
 
 
-    crimes = CrimeDataPoint.objects.all()
+    crimes = CrimeDataPoint.objects.all( #add filter)
     # object code or i contain
     # object_code__gte = 8000
     # object_code_description__icontains = 'kidnap'
