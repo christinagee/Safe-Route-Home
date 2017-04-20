@@ -14,7 +14,7 @@ class Send_Data:
         self.start = start
         self.end = end
         self.Data()
-        self.data['routeControlPointCollection'] = 
+        self.data['routeControlPointCollection'] = points
         self.data= json.dumps(self.data)
         self.Get_Directions()
 
