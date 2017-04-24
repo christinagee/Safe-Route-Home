@@ -1,7 +1,12 @@
+import requests
+import json
+from pickle import dump, load
+import sys
 from django.shortcuts import render
 
 from BestRoute.models import CrimeDataPoint
 
+from Map_Quest_Get import Send_Data
 
 # import panda or google maps api here after you pip install it
 # do not forget to add it to INSTALLED_APPS in RouteHome.settings
@@ -28,12 +33,11 @@ def crime_map(request):
     murder = request.GET.get('murder', False)
 
 
-    crimes = CrimeDataPoint.objects.all()
+    crimes = CrimeDataPoint.objects.all( #add filter)
     # object code or i contain
     # object_code__gte = 8000
     # object_code_description__icontains = 'kidnap'
-    jsonObject = {}
-    jsonObject['routeControlPointCollection'] = []
+    routeControlPointCollection = []
     # jsonObject['routeControlPointCollection'].append('sdfsd')
     for crime in crimes:
         json_entry = {
@@ -45,7 +49,21 @@ def crime_map(request):
         jsonObject['routeControlPointCollection'].append(json_entry)
     print (jsonObject)
 
-    # FrankyMagicFunction(location_a, location_b, jsonObject)
+    # jsonObject = {}
+    # jsonObject['routeControlPointCollection'] = []
+    # # jsonObject['routeControlPointCollection'].append('sdfsd')
+    # for crime in crimes:
+    #     json_entry = {
+    #         'lat': crime.latitude,
+    #         'long': crime.longitude,
+    #         'weight': 5,
+    #         'radius': 2
+    #     }
+    #     jsonObject['routeControlPointCollection'].append(json_entry)
+    # print jsonObject
+
+
+Send_Data(start, end, routeControlPointCollection)
     # Take what Frnaky gives us ... parse it and then pass it to the template
 
 
