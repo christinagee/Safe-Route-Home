@@ -43,7 +43,7 @@ def crime_map(request):
             'radius': 2
         }
         jsonObject['routeControlPointCollection'].append(json_entry)
-    print jsonObject
+    print (jsonObject)
 
     # FrankyMagicFunction(location_a, location_b, jsonObject)
     # Take what Frnaky gives us ... parse it and then pass it to the template

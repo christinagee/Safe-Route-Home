@@ -14,7 +14,7 @@ class Send_Data:
         self.start = start
         self.end = end
         self.Data()
-        self.data['routeControlPointCollection'] = 
+        self.data['routeControlPointCollection'] = points
         self.data= json.dumps(self.data)
         self.Get_Directions()
 
@@ -54,7 +54,7 @@ class Send_Data:
 
     def Store_Directions(self):
         Directions = open(Directions,'wb')
-        dump(self.directions,Directions)
+        dump(self.directions,Directions) # move this to a template, template displays stuff to user 
         Directions.close()
 
 if __name__ == '__main__':
