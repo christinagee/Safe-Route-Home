@@ -1,12 +1,13 @@
-import requests
 import json
-from pickle import dump, load
 import sys
+from pickle import dump, load
+
+import requests
 from django.shortcuts import render
 
 from BestRoute.models import CrimeDataPoint
-
 from Map_Quest_Get import Send_Data
+
 
 # import panda or google maps api here after you pip install it
 # do not forget to add it to INSTALLED_APPS in RouteHome.settings
@@ -32,13 +33,12 @@ def crime_map(request):
     caraccident = request.GET.get('caraccident', False)
     murder = request.GET.get('murder', False)
 
-
-    crimes = CrimeDataPoint.objects.all( #add filter)
+    crimes = CrimeDataPoint.objects.all()  # add filter)
     # object code or i contain
     # object_code__gte = 8000
     # object_code_description__icontains = 'kidnap'
-    routeControlPointCollection = []
-    # jsonObject['routeControlPointCollection'].append('sdfsd')
+    jsonObject = {}
+    jsonObject['routeControlPointCollection'] = []
     for crime in crimes:
         json_entry = {
             'lat': crime.latitude,
@@ -47,7 +47,7 @@ def crime_map(request):
             'radius': 2
         }
         jsonObject['routeControlPointCollection'].append(json_entry)
-    print (jsonObject)
+    # print (jsonObject)
 
     # jsonObject = {}
     # jsonObject['routeControlPointCollection'] = []
@@ -62,10 +62,9 @@ def crime_map(request):
     #     jsonObject['routeControlPointCollection'].append(json_entry)
     # print jsonObject
 
-
-Send_Data(start, end, routeControlPointCollection)
+    Send_Data(location_a, location_b, jsonObject[
+              'routeControlPointCollection'])
     # Take what Frnaky gives us ... parse it and then pass it to the template
-
 
     # This is an example of a Django Query with a filter
     # .order_by(month) < You can do things like this

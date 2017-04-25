@@ -5,46 +5,47 @@ header {
 }
 
 header .row {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 header h1 {
-  font-weight: 700;
-  margin: 0;
+    font-weight: 700;
+    margin: 0;
 }
 
 header nav {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 header p {
-  padding: 0 20px;
-  margin: 0;
+    padding: 0 20px;
+    margin: 0;
 }
 
 .jumbotron {
-  display: flex;
-  align-items: center;
-  background-image: url('https://c1.staticflickr.com/2/1256/4723264284_34c218968a_b.jpg');
-  background-size: cover;
-  color: :#ffffff;
-  height: 600px;
-  text-shadow: 0.25px 0.25px 0.25px #000000;
+    display: flex;
+    align-items: center;
+    background-image: url('https://c1.staticflickr.com/2/1256/4723264284_34c218968a_b.jpg');
+    background-size: cover;
+    color: :#ffffff;
+    height: 600px;
+    text-shadow: 0.25px 0.25px 0.25px #000000;
 }
 
 .jumbotron h4 {
-  font-family: 'Arial', Sans-serif;
-  color: white;
+    font-family: 'Arial', Sans-serif;
+    color: white;
 }
 
 .jumbotron p {
-  font-family: 'Arial', Sans-serif;
-  color: white;
+    font-family: 'Arial', Sans-serif;
+    color: white;
 }
 
 #homebtn {
-  display: block;;
-  width: 200px;
+    display: block;
+    ;
+    width: 200px;
 }
