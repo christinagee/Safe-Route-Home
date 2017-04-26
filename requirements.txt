@@ -5,6 +5,7 @@ Django==1.10.6
 django-import-export==0.5.1
 gunicorn==19.7.1
 packaging==16.8
+pkg-resources==0.0.0
 psycopg2==2.7.1
 pyparsing==2.2.0
 requests==2.13.0
