@@ -1,12 +1,15 @@
 import json
 import sys
+import geocoder
 from pickle import dump, load
-
+import Ellipse
 import requests
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from BestRoute.models import CrimeDataPoint
 from Map_Quest_Get import Send_Data
+from django.core.management import execute_from_command_line
+
 
 
 # import panda or google maps api here after you pip install it
@@ -41,20 +44,28 @@ def crime_map(request):
         final_crime_array.extend(all_crimes.filter(offense_code__gte=1000).filter(offense_code__lte=2000))
     if kidnap:
         final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
-
+    locA = geocoder.google(location_a)
+    locB = geocoder.google(location_b)
+    latlongA = locA.latlng
+    latlongB = locB.latlng
+    ell = Ellipse.Ellipse(latlongA[0], latlongA[1], latlongB[0], latlongB[1])
     jsonObject = {}
     jsonObject['routeControlPointCollection'] = []
     for crime in final_crime_array:
-        json_entry = {
-            'lat': crime.latitude,
-            'long': crime.longitude,
-            'weight': 5,
-            'radius': 2
-        }
-        jsonObject['routeControlPointCollection'].append(json_entry)
+        if ell.isWithinEllipse(crime.latitude, crime.longitude):
+            print >>True
+            json_entry = {
+                'lat': crime.latitude,
+                'long': crime.longitude,
+                'weight': 5,
+                'radius': 2
+            }
+            jsonObject['routeControlPointCollection'].append(json_entry)
+        else:
+            print(False)
 
     map_quest_api = Send_Data(location_a, location_b, jsonObject)
-        
+
     try:
         route = map_quest_api.Get_Directions()['route']['legs'][0]['maneuvers']
     except:
