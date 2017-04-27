@@ -53,7 +53,7 @@ def crime_map(request):
     jsonObject['routeControlPointCollection'] = []
     for crime in final_crime_array:
         if ell.isWithinEllipse(crime.latitude, crime.longitude):
-            print >>True
+            print(True)
             json_entry = {
                 'lat': crime.latitude,
                 'long': crime.longitude,
