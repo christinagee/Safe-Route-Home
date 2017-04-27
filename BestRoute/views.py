@@ -54,7 +54,7 @@ def crime_map(request):
         jsonObject['routeControlPointCollection'].append(json_entry)
 
     map_quest_api = Send_Data(location_a, location_b, jsonObject)
-        
+
     try:
         route = map_quest_api.Get_Directions()['route']['legs'][0]['maneuvers']
     except:
