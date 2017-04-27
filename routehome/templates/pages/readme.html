@@ -4,38 +4,76 @@
 <div class='container'>
   <div class='col-sm-12'>
 
-<h3><center>ReadMe for Route-Home</center></h3>
-<p> You can find our instructions on how to download our app by visiting our
-  github, or by following the steps below.<p>
-<hr>
-<h3>Authors</h3>
-<p>
+<<h1 id="readmeforroutehome">README for Route-Home!</h1>
+
+<p>Route-Home is a web-app that....
+Link to <a href="https://github.com/christinagee/Safe-Route-Home">github repository.</a> </p>
+
+<h2 id="authors">Authors</h2>
+
+<p><strong>Students:</strong></p>
+
+<blockquote>
   <ul>
-    <li>Christina Gee <b>personal website</b></li>
-    <li>Frankie Devanbu <b>personal website</b></li>
-    <li>Jeff Pflueger<b>personal website</b></li>
-    <li>Alisha Pegan <b>personal website</b></li>
+  <li>Christina Gee: worked on data gathering, running SQL database, managing Django, and overseeing our system integration. Check out her other works <a href="http://www.christinagee.com">here</a> . </li>
+
+  <li>Frankie Devanbu: managed mapping and directions component of the project using the MapQuest API. Learn more about her <a href="https://www.francesdevanbu.com/">here</a> .</li>
+
+  <li>Jeff Pflueger: worked on filtering data points to only consider avoid points near the start and end location. Learn more about her <a href="">here</a> .</li>
+
+  <li>Alisha Pegan: worked on the webpage and user design. Check our her github repo <a href="http://github.io/apegan/">here</a> . </li>
   </ul>
-</p>
-<h3>Attribution</h3>
-<p>
+</blockquote>
+
+<p><strong>Attributors:</strong></p>
+
+<blockquote>
   <ul>
-    <li> ZACK THE WIZARD OF DJANDO
+  <li>Zack: HE IS THE GOD OF GODS OF DJANGO.  Check out his repertoire <a href="">here</a>  . </li>
   </ul>
-</p>
-<hr>
-<h3>Getting Started</h3>
-<ol>
-  <li><xmp>mkdir Safe-Route-Home</xmp></li>
-  <li><xmp>virtualenv .</xmp></li>
-  <li><xmp>git clone</xmp><a href=https://github.com/christinagee/Safe-Route-Home.git></a></li>
-  <li><xmp>cd Safe-Route-Home</xmp></li>
-  <li><xmp>pip install -r requirements.txt</xmp></li>
-  <li><xmp>python manage.py runserver</xmp></li>
-</ol>
-<p> Our central source of code can be found in the views.pyfile.
-<br>
-<h3>Usage</h3>
-<h3>License</h3>
+</blockquote>
+
+<h2 id="gettingstarted">Getting Started</h2>
+
+<p><strong>Installation:</strong></p>
+
+<blockquote>
+  <p>Open your command line and navigate to the folder you want to install the program. In your command line:</p>
+
+  <p><code>mkdir Safe-Route-Home</code></p>
+
+  <p><code>virtualenv .</code></p>
+
+  <p>Go to the github repository and clone it: <a href="https://github.com/christinagee/Safe-Route-Home">https://github.com/christinagee/Safe-Route-Home</a>
+  <code>git clone https://github.com/christinagee/Safe-Route-Home</code></p>
+
+  <p>Navigate to the subfolder:
+  <code>cd Safe-Route-Home</code></p>
+
+  <p>Install all the necessary programs:
+  <code>pip install -r requirements.txt</code></p>
+
+  <p>Run the webpage using Django:
+  <code>python manage.py runserver</code></p>
+</blockquote>
+
+<h2 id="usage">Usage</h2>
+
+<blockquote>
+  <p>Once you run the program in your terminal, click on the link http://127.0.0.1:8000/, or the link posted in the terminal. </p>
+
+  <p>You will be directed to the website, and can navigate through the website via the home page, about, team, and readme pages (where you are now!). </p>
+
+  <p>The inputs the webpage gets is location a, b, and events to avoid. You will not need to input any other data or files. </p>
+  <p>If you ever return to the file to run the program again, go to the Safe-Route-Home folder, and in your terminal, activate your virtual environment by writing:</p>
+  <p><code>source bin/activate</code></p>
+</blockquote>
+
+<h2 id="license">License</h2>
+
+<blockquote>
+  <p>We are licensed by the MIT Creative Commons.
+  Add license.txt in repo</p>
+</blockquote>
 
 {% endblock %}
