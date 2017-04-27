@@ -3,8 +3,8 @@ import sys
 from pickle import dump, load
 
 import requests
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from BestRoute.models import CrimeDataPoint
 from Map_Quest_Get import Send_Data
 
@@ -33,13 +33,18 @@ def crime_map(request):
     caraccident = request.GET.get('caraccident', False)
     murder = request.GET.get('murder', False)
 
-    crimes = CrimeDataPoint.objects.all()  # add filter)
-    # object code or i contain
-    # object_code__gte = 8000
-    # object_code_description__icontains = 'kidnap'
+    final_crime_array = []
+    all_crimes = CrimeDataPoint.objects.all()
+    # Begin Alisha - figure out what code to query in order to filter
+    #figure out code groups - what classifies as an assult?
+    if assault:
+        final_crime_array.extend(all_crimes.filter(offense_code__gte=1000).filter(offense_code__lte=2000))
+    if kidnap:
+        final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
+
     jsonObject = {}
     jsonObject['routeControlPointCollection'] = []
-    for crime in crimes:
+    for crime in final_crime_array:
         json_entry = {
             'lat': crime.latitude,
             'long': crime.longitude,
@@ -47,42 +52,18 @@ def crime_map(request):
             'radius': 2
         }
         jsonObject['routeControlPointCollection'].append(json_entry)
-    # print (jsonObject)
 
-    # jsonObject = {}
-    # jsonObject['routeControlPointCollection'] = []
-    # # jsonObject['routeControlPointCollection'].append('sdfsd')
-    # for crime in crimes:
-    #     json_entry = {
-    #         'lat': crime.latitude,
-    #         'long': crime.longitude,
-    #         'weight': 5,
-    #         'radius': 2
-    #     }
-    #     jsonObject['routeControlPointCollection'].append(json_entry)
-    # print jsonObject
-
-    Send_Data(location_a, location_b, jsonObject[
-              'routeControlPointCollection'])
-    # Take what Frnaky gives us ... parse it and then pass it to the template
-
-    # This is an example of a Django Query with a filter
-    # .order_by(month) < You can do things like this
-    # crimes = CrimeDataPoint.objects.all().filter(street=location_a)
-    # PUT ALL OF YOUR DATA ANALYSIS HERE
-    #
-    #
-
-    # When you want to pass info into the template, you define them as a context variable
-    # look into the crime-map.html file to get a better understanding of what
-    # I am reffering to
-
+    map_quest_api = Send_Data(location_a, location_b, jsonObject)
+        
+    try:
+        route = map_quest_api.Get_Directions()['route']['legs'][0]['maneuvers']
+    except:
+        return redirect('/')
     context = {
-        # first one is for the tempalte, second one is defined in your view...
         'location_a': location_a,
         'location_b': location_b,
         'check_values': assault,
-        'crimes': []
+        'route': route
     }
     # This renders our the crime-map.html file with all of the defined context
     # variables

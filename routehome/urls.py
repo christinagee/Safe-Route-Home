@@ -17,9 +17,13 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from BestRoute.views import crime_map, location_form
+from routehome.views import code, team, about
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', location_form),
     url(r'^map/$', crime_map),
-]
+    url(r'^code/$', code),
+    url(r'^team/$', team),
+    url(r'^about/$', about),
+    ]

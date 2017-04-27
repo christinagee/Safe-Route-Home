@@ -15,8 +15,9 @@ class Send_Data:
         self.end = end
         self.Data()
         self.data['routeControlPointCollection'] = points
-        self.data= json.dumps(self.data)
+        self.data = json.dumps(self.data)
         self.Get_Directions()
+
 
 
     def Data(self):
@@ -40,21 +41,21 @@ class Send_Data:
         self.options['drivingStyle'] = 2
         self.options['highwayEfficiency'] = 21
 
-    def RouteControlPoints(self):
-        pass
 
     def Get_Directions(self):
         url='http://www.mapquestapi.com/directions/v2/route?key=myLzT3Tf3PjQVNlYNuPhVCU7jxBP0wVG'
         self.response = requests.post(url, data=self.data)
+        # Handle 500 Erros with pytho's request api
+
         self.response = self.response.json()
 
-    def Sort_Directions(self):
-        pass
+        return self.response
+
 
 
     def Store_Directions(self):
         Directions = open(Directions,'wb')
-        dump(self.directions,Directions) # move this to a template, template displays stuff to user 
+        dump(self.directions,Directions) # move this to a template, template displays stuff to user
         Directions.close()
 
 if __name__ == '__main__':

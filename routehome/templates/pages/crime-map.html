@@ -1,42 +1,27 @@
-<!doctype html>
+{% extends './index.html' %}
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <ul>
+        <li>START: {{location_a}}</li>
+        <li> END: {{location_b}}</li>
+      </ul>
+        <hr>
+      <ul>
+        {% for route_dict in route %}
+        <p>Turn {{ forloop.counter }}</p>
+          <li><img src="{{ route_dict.iconUrl }}" alt=""></li>
+          <li>{{ route_dict.distance }} mi</li>
+          <li>{{ route_dict.narrative }}</li>
+          <hr>
+        {% endfor %}
+      </ul>
+    </div>
 
-  <title>Route-Home</title>
-  <meta name="description" content="The Route Home">
-  <meta name="author" content="SitePoint">
+  </div>
 
-  <link rel="stylesheet" type='text/css' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="../static/css/map.css">
-</head>
+</div>
 
-<body>
-  <header class='container'>
-    <div class="row">
-      <h1 class='col-sm-4'>Route Home</h1>
-      <nav class='col-sm-8 text-right'>
-       <p>About</p>
-       <p>Code</p>
-       <p>The Team</p>
-     </nav>
-   </div>
-</header>
-
-  <ul>
-    <li>{{location_a}}</li>
-    <li>{{location_b}}</li>
-  </ul>
-  <h1>Crimes Avoided ({{location_a}})</h1>
-  <ul>
-    {% for crime in crimes %}
-      <li>
-        {{crime}} - {{crime.offense_code}}
-      </li>
-    {% endfor %}
-  </ul>
-</body>
-
-<!--  -->
-</html>
+{% endblock %}

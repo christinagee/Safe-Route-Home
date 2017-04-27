@@ -1,0 +1,70 @@
+{% extends './index.html' %}
+
+{% block content %}
+  <div class='container'>
+    <div class='col-sm-12'>
+
+<h3>User Instructions</h3>
+  <p> You can find our instructions on how to download our app by visiting our
+    github, or by following the steps below.<p>
+  <ol>
+    <li><xmp>mkdir Safe-Route-Home</xmp></li>
+    <li><xmp>virtualenv .</xmp></li>
+    <li><xmp>git clone</xmp><a href=https://github.com/christinagee/Safe-Route-Home.git></a></li>
+    <li><xmp>cd Safe-Route-Home</xmp></li>
+    <li><xmp>pip install -r requirements.txt</xmp></li>
+    <li><xmp>python manage.py runserver</xmp></li>
+  </ol>
+  <p> Our central source of code can be found in the views.pyfile.
+<br>
+<h3>Implementation Architecture</h3>
+
+<!--
+
+<br>
+<br>
+
+Our view.py file is what the user is able to see from the front end. It has 2 views:
+<ol>
+  <li><b>Location View:</b> Purpose is to render a get method form that asks the user
+    where their starting location is, ending location and some safety filters.</li>
+
+  <li><b> Crime Map:</b> Renders out the geolocation of crimes.
+    New URL that is looking for 3 things inside the URL and plucking out 3 data points (Location A, Location B + safety filters),
+    takes crime data points from model and run a huge search on the query set using Map Quest API.
+
+
+    ***
+    We are using Python's Django framework with a POST gress database to deploy on Heroku.
+    We used the python package Django import/export to take the 171,000 row cvs data base
+    and convert into a useable to a db.SQLite3 database for local development. The team
+    shared the database on github. For production, we converted the db.SQLite3 data base
+    and pushed it to Heroku. -->
+
+    We pulled from the Boston Crime data set located on the boston.gov website. We were
+    fortunate that the dataset was clean so we did not have to format the data further.
+    <br>
+    <br>
+    When the user fills out the location form all the data points
+    are passed through the URL parameters, and the crime database is filtered based on the user's
+    safety requirements indicated by the checkboxes.  The database is then iterated through
+    into a python dictionary which is passed to MapQuest as a JSON object of crime points to avoid
+    along with the start and end location.
+
+    <br>
+    <br>
+    Map Quest then returns to Django another JSON object which contains various navigation
+    information and step by step directions. We then parsed through that data and iterate over it
+    into our HTML template.
+
+
+<h3>Results</h3>
+<br>
+<center><img src=/routehome/templates/pics/input_address.png><center>
+<center><img src=/routehome/templates/pics/directions.png><center>
+<h3>Project Evolution</h3>
+<br>
+
+<br>
+<h3> Attribution <h3>
+{% endblock %}
