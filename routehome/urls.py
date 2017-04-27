@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from BestRoute.views import crime_map, location_form
-from routehome.views import code, team, about
+from routehome.views import code, team, about, readme
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^code/$', code),
     url(r'^team/$', team),
     url(r'^about/$', about),
+    url(r'^readme/$', readme),
     ]
