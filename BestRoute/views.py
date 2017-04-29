@@ -44,6 +44,10 @@ def crime_map(request):
         final_crime_array.extend(all_crimes.filter(offense_code__gte=1000).filter(offense_code__lte=2000))
     if kidnap:
         final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
+    if kidnap:
+        final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
+    if kidnap:
+        final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
     locA = geocoder.google(location_a)
     locB = geocoder.google(location_b)
     latlongA = locA.latlng
