@@ -1,4 +1,4 @@
-/*header {
+header {
     font-family: 'Arial', Sans-serif;
     color: grey;
     padding: 20px 0;
@@ -30,7 +30,7 @@ header p {
 
     background-size: cover;
     color: :#ffffff;
-    height: 600px;
+    height: 500px;
     text-shadow: 0.25px 0.25px 0.25px #000000;
 }
 
@@ -47,8 +47,8 @@ header p {
 #homebtn {
     display: block;
     ;
-    width: 200px;
+    width: 100px;
 }
 .navbar {
   margin-bottom: 0px !important;
-}*/
+}
