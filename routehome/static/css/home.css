@@ -1,4 +1,4 @@
-header {
+/*header {
     font-family: 'Arial', Sans-serif;
     color: grey;
     padding: 20px 0;
@@ -42,7 +42,7 @@ header p {
 .jumbotron p {
     font-family: 'Arial', Sans-serif;
     color: white;
-}
+}*/
 
 #homebtn {
     display: block;

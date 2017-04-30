@@ -4,8 +4,7 @@
 <div class="container">
   <div class="row">
     <br><br>
-    <div class="col-lg-4 col-lg-offset-4 jumbotron">
-
+    <div class="col-lg-8 col-lg-offset-2 jumbotron">
         <h4 class="center text-center">Where are you looking to go?</h4>
         <hr>
           <form method='GET' action='/map/' class="form-horizontal">
@@ -27,56 +26,54 @@
                 </div>
                 <div class='row'>
                   <div class='col-sm-4'>
-                    <h5 class='center text-center'><b> Physical </b></h5>
+                    <h5 class='text-left'><b> Physical </b></h5>
                     <h6 class="text-left left">
                       <input type="checkbox" name="homicide" >
                       <label for="homicide">Homicide</label> <br>
-                      <input type="checkbox" name="manslaugher" >
-                      <label for="manslaughter">Manslaughter</label> <br>
                       <input type="checkbox" name="caraccident">
                       <label for="caraccident">Vehicular Accidents</label> <br>
-                      <input type="checkbox" name="drunkdriving">
-                      <label for="drunkdriving">Drunk Driving</label><br>
-                      <input type="checkbox" name="sexualassault">
-                      <label for="sexualassault">Sexual Assault</label><br>
+                      <input type="checkbox" name="oui">
+                      <label for="oui">Operating Under the Influence</label><br>
+                      <input type="checkbox" name="indecentAssault">
+                      <label for="indecentAssault">Indecent Assault</label><br>
                       <input type="checkbox" name="kidnap">
                       <label for="kidnap">Missing Person Reported</label><br>
+                      <input type="checkbox" name="robbery" >
+                      <label for="robbery">Robbery</label> <br>
                     </h6>
                   </div>
                   <div class='col-sm-4'>
-                    <h5 class='center text-center'><b> Property </b></h5>
+                    <h5 class='text-left'><b> Property </b></h5>
                     <h6 class="text-left left">
                       <input type="checkbox" name="autotheft" >
                       <label for="autotheft">Auto Theft</label> <br>
-                      <input type="checkbox" name="robbery" >
-                      <label for="robbery">Robbery</label> <br>
-                      <input type="checkbox" name="caraccident">
-                      <label for="caraccident">Vehicular Accidents</label> <br>
-                      <input type="checkbox" name="murder">
-                      <label for="murder">Murder</label>
+                      <input type="checkbox" name="larceny">
+                      <label for="larceny">Larceny</label> <br>
+                      <input type="checkbox" name="burglary">
+                      <label for="burglary">Burglary</label>
                     </h6>
                   </div>
                   <div class='col-sm-4'>
-                    <h5 class='center text-center'><b> Bodily Harm </b></h5>
+                    <h5 class='text-left'><b> Others </b></h5>
                     <h6 class="text-left left">
-                      <input type="checkbox" name="assault" >
-                      <label for="assault">Assault</label> <br>
-                      <input type="checkbox" name="kidnap" >
-                      <label for="kidnap">Kidnapping</label> <br>
-                      <input type="checkbox" name="caraccident">
-                      <label for="caraccident">Vehicular Accidents</label> <br>
-                      <input type="checkbox" name="murder">
-                      <label for="murder">Murder</label>
+                      <input type="checkbox" name="conduct" >
+                      <label for="conduct">Disorderly Conduct</label> <br>
+                      <input type="checkbox" name="disputes" >
+                      <label for="disputes">Verbal Disputes</label> <br>
+                      <input type="checkbox" name="prostitution">
+                      <label for="prostitution">Prostitution</label> <br>
+                      <input type="checkbox" name="sexoffender">
+                      <label for="sexoffender">Registered Sex Offender</label>
                     </h6>
                   </div>
                 </div>
                 </div>
-              </div>
-              <br><br><br>
+              <br>
               <div class='row'>
                 <center>
                 <button type="submit" id='homebtn' class="btn btn-default btn-success btn-block">Submit</button>
               </center>
+              </div>
               </div>
             </div>
           </form>

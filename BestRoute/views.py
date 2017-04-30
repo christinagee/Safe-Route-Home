@@ -31,23 +31,53 @@ def crime_map(request):
     # Takes in URL params passed from locataion_form
     location_a = request.GET.get('location_a', '')
     location_b = request.GET.get('location_b', '')
-    assault = request.GET.get('assault', False)
-    kidnap = request.GET.get('kidnap', False)
+    homicide = request.GET.get('homicide', False)
     caraccident = request.GET.get('caraccident', False)
-    murder = request.GET.get('murder', False)
+    oui = request.GET.get('oui', False)
+    indecentAssault = request.GET.get('indecentAssault', False)
+    kidnap = request.GET.get('kidnap', False)
+    robbery = request.GET.get('robbery', False)
+    autotheft = request.GET.get('autotheft', False)
+    larceny = request.GET.get('larceny', False)
+    burglary = request.GET.get('burglary', False)
+    conduct = request.GET.get('conduct', False)
+    disputes = request.GET.get('disputes', False)
+    prostitution = request.GET.get('prostitution', False)
+    sexoffender = request.GET.get('sexoffender', False)
 
     final_crime_array = []
     all_crimes = CrimeDataPoint.objects.all()
     # Begin Alisha - figure out what code to query in order to filter
     #figure out code groups - what classifies as an assult?
-    if assault:
-        final_crime_array.extend(all_crimes.filter(offense_code__gte=1000).filter(offense_code__lte=2000))
+
+    if homicide:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Homicide'))
+    if caraccident:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Vehicle Accident'))
+    if oui:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Operating Under the Influence'))
+    if indecentAssault:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Indecent Assault'))
     if kidnap:
-        final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
-    if kidnap:
-        final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
-    if kidnap:
-        final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Missing Person'))
+    if robbery:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Robbery'))
+    if autotheft:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Auto Theft'))
+    if larceny:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Larceny'))
+    if burglary:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Burglary'))
+    if conduct:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Disorderly Conduct'))
+    if disputes:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Verbal Disputes'))
+    if prostitution:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Prostitution'))
+    if sexoffender:
+        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Sex Offender'))
+    # if kidnap:
+    #     final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
     locA = geocoder.google(location_a)
     locB = geocoder.google(location_b)
     latlongA = locA.latlng
@@ -77,7 +107,6 @@ def crime_map(request):
     context = {
         'location_a': location_a,
         'location_b': location_b,
-        'check_values': assault,
         'route': route
     }
     # This renders our the crime-map.html file with all of the defined context
