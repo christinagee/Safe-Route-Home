@@ -147,5 +147,7 @@ STATICFILES_DIRS = (
 GoogleMaps_API = str(os.environ.get('GoogleMaps_API'))
 MapQuest_API = str(os.environ.get('MapQuest_API'))
 
-
-from API_Keys import GoogleMaps_API, MapQuest_API
+try:
+    from API_Keys import GoogleMaps_API, MapQuest_API
+except:
+    pass
