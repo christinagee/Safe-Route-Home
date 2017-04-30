@@ -9,8 +9,7 @@ from django.http import JsonResponse
 from BestRoute.models import CrimeDataPoint
 from Map_Quest_Get import Send_Data
 from django.core.management import execute_from_command_line
-
-
+from routehome.settings import GoogleMaps_API, MapQuest_API
 
 # import panda or google maps api here after you pip install it
 # do not forget to add it to INSTALLED_APPS in RouteHome.settings
@@ -87,10 +86,12 @@ def crime_map(request):
     except:
         return redirect('/')
 
+    print(GoogleMaps_API)
     context = {
         'location_a': location_a,
         'location_b': location_b,
-        'route': route
+        'route': route,
+        'googleAPI': GoogleMaps_API
     }
     # This renders our the crime-map.html file with all of the defined context
     # variables

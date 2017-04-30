@@ -2,6 +2,7 @@ import requests
 import json
 from pickle import dump , load
 import sys
+from routehome.settings import MapQuest_API
 
 
 
@@ -43,7 +44,7 @@ class Send_Data:
 
 
     def Get_Directions(self):
-        url='http://www.mapquestapi.com/directions/v2/route?key=myLzT3Tf3PjQVNlYNuPhVCU7jxBP0wVG'
+        url='http://www.mapquestapi.com/directions/v2/route?key=%s' % (MapQuest_API)
         self.response = requests.post(url, data=self.data)
         # Handle 500 Erros with pytho's request api
 
