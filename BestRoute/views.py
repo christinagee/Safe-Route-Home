@@ -31,53 +31,33 @@ def crime_map(request):
     # Takes in URL params passed from locataion_form
     location_a = request.GET.get('location_a', '')
     location_b = request.GET.get('location_b', '')
-    homicide = request.GET.get('homicide', False)
-    caraccident = request.GET.get('caraccident', False)
-    oui = request.GET.get('oui', False)
-    indecentAssault = request.GET.get('indecentAssault', False)
-    kidnap = request.GET.get('kidnap', False)
-    robbery = request.GET.get('robbery', False)
-    autotheft = request.GET.get('autotheft', False)
-    larceny = request.GET.get('larceny', False)
-    burglary = request.GET.get('burglary', False)
-    conduct = request.GET.get('conduct', False)
-    disputes = request.GET.get('disputes', False)
-    prostitution = request.GET.get('prostitution', False)
-    sexoffender = request.GET.get('sexoffender', False)
+    filters = {
+        'homicide': 'Homicide',
+        'caraccident': 'Vehicle Accident',
+        'oui': 'Operating Under the Influence',
+        'indecentAssault': 'Indecent Assault',
+        'kidnap': 'Missing Person',
+        'robbery': 'Robbery',
+        'autotheft': 'Auto Theft',
+        'larceny': 'Larceny',
+        'burglary': 'Burglary',
+        'conduct': 'Disorderly Conduct',
+        'disputes': 'Verbal Disputes',
+        'prostitution': 'Prostitution',
+        'sexoffender': 'Sex Offender'
+    }
 
     final_crime_array = []
     all_crimes = CrimeDataPoint.objects.all()
-    # Begin Alisha - figure out what code to query in order to filter
-    #figure out code groups - what classifies as an assult?
 
-    if homicide:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Homicide'))
-    if caraccident:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Vehicle Accident'))
-    if oui:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Operating Under the Influence'))
-    if indecentAssault:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Indecent Assault'))
-    if kidnap:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Missing Person'))
-    if robbery:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Robbery'))
-    if autotheft:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Auto Theft'))
-    if larceny:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Larceny'))
-    if burglary:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Burglary'))
-    if conduct:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Disorderly Conduct'))
-    if disputes:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Verbal Disputes'))
-    if prostitution:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Prostitution'))
-    if sexoffender:
-        final_crime_array.extend(all_crimes.filter(offense_code_group__icontains='Sex Offender'))
+    for (key, value) in filters.items():
+        name = request.GET.get(key, False)
+        if name:
+            final_crime_array.extend(all_crimes.filter(offense_code_group__icontains=value))
+
     # if kidnap:
     #     final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
+
     locA = geocoder.google(location_a)
     locB = geocoder.google(location_b)
     latlongA = locA.latlng
@@ -86,6 +66,8 @@ def crime_map(request):
     jsonObject = {}
     jsonObject['routeControlPointCollection'] = []
     for crime in final_crime_array:
+        if not crime.latitude or crime.longitude:
+            continue
         if ell.isWithinEllipse(crime.latitude, crime.longitude):
             print(True)
             json_entry = {
@@ -104,6 +86,7 @@ def crime_map(request):
         route = map_quest_api.Get_Directions()['route']['legs'][0]['maneuvers']
     except:
         return redirect('/')
+
     context = {
         'location_a': location_a,
         'location_b': location_b,
