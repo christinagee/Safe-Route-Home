@@ -47,7 +47,8 @@ You will be directed to the website, and can navigate through the website via th
 The inputs the webpage gets is location a, b, and events to avoid. You will not need to input any other data or files.  
 
   <p>If you ever return to the file to run the program again, go to the Safe-Route-Home folder, and in your terminal, activate your virtual environment by writing:</p>
-  `source bin/activate`
+ 
+ `source bin/activate`
 
 
 
