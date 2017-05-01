@@ -60,33 +60,35 @@ def crime_map(request):
     locA = geocoder.google(location_a)
     locB = geocoder.google(location_b)
     latlongA = locA.latlng
+    # print(latlongA)
     latlongB = locB.latlng
+    # print(latlongB)
     ell = Ellipse.Ellipse(latlongA[0], latlongA[1], latlongB[0], latlongB[1])
-    jsonObject = {}
-    jsonObject['routeControlPointCollection'] = []
+    jsonObject = []
     for crime in final_crime_array:
-        if not crime.latitude or crime.longitude:
+        if not (crime.latitude or crime.longitude):
             continue
         if ell.isWithinEllipse(crime.latitude, crime.longitude):
-            print(True)
+            # print(True)
             json_entry = {
                 'lat': crime.latitude,
                 'long': crime.longitude,
-                'weight': 5,
-                'radius': 2
+                'weight': 1,
+                'radius': 0.05
             }
-            jsonObject['routeControlPointCollection'].append(json_entry)
-        else:
-            print(False)
+            jsonObject.append(json_entry)
+        # else:
+        #     print(False)
+    # print(jsonObject)
 
-    map_quest_api = Send_Data(location_a, location_b, jsonObject)
-
+    map_quest_api = Send_Data(latlongA, latlongB, jsonObject)
+    # print(map_quest_api)
     try:
         route = map_quest_api.Get_Directions()['route']['legs'][0]['maneuvers']
     except:
         return redirect('/')
 
-    print(GoogleMaps_API)
+    # print(GoogleMaps_API)
     context = {
         'location_a': location_a,
         'location_b': location_b,
