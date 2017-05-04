@@ -20,6 +20,9 @@ from routehome.settings import GoogleMaps_API, MapQuest_API, Google_JS_API
 # When the form is submited the params are then passed into the next url
 # '/map' which calls the crime map view
 def location_form(request):
+    """
+    Function renders the landing page for the website
+    """
     return render(request, 'pages/location-form.html')
 
 # This view serves to render out the google map and process all the
@@ -27,6 +30,11 @@ def location_form(request):
 
 
 def crime_map(request):
+    """
+    Takes in URL params passed from location_form.
+    Communicates with MapQuest and Google APIs.
+    Displays information on crime-map page
+    """
     # Takes in URL params passed from locataion_form
     location_a = request.GET.get('location_a', '')
     location_b = request.GET.get('location_b', '')
@@ -47,6 +55,7 @@ def crime_map(request):
     }
 
     final_crime_array = []
+    #Get data from database
     all_crimes = CrimeDataPoint.objects.all()
 
     for (key, value) in filters.items():
@@ -54,22 +63,23 @@ def crime_map(request):
         if name:
             final_crime_array.extend(all_crimes.filter(offense_code_group__icontains=value))
 
-    # if kidnap:
-    #     final_crime_array.extend(all_crimes.filter(offense_code__gte=2001).filter(offense_code__lte=3000))
-
+    #Get locations of start and end
     locA = geocoder.google(location_a)
     locB = geocoder.google(location_b)
     latlongA = locA.latlng
-    # print(latlongA)
     latlongB = locB.latlng
-    print(len(final_crime_array))
+
+
+    #Create Ellipse from start and end location
     ell = Ellipse.Ellipse(latlongA[0], latlongA[1], latlongB[0], latlongB[1])
     jsonObject = []
     for crime in final_crime_array:
+        #If the crime has a longitude and latitude
         if not (crime.latitude or crime.longitude):
             continue
-        if ell.isWithinEllipse(crime.latitude, crime.longitude): #or True:
-            # print(True)
+        #If the crime is within the ellipse
+        if ell.isWithinEllipse(crime.latitude, crime.longitude):
+            #Add to the json object
             json_entry = {
                 'lat': crime.latitude,
                 'lng': crime.longitude,
@@ -77,18 +87,18 @@ def crime_map(request):
                 'radius': 0.5,
             }
             jsonObject.append(json_entry)
-        # else:
-        #     print(False)
-    print(len(jsonObject))
+
+    #Send to MapQuest API
     map_quest_api = Send_Data(latlongA, latlongB, jsonObject)
-    # print(map_quest_api)
+
+    #Try getting route directions
     try:
         route = map_quest_api.Get_Directions()['route']['legs'][0]['maneuvers']
         mapquest_waypts = json.dumps([maneuver['startPoint'] for maneuver in route][1:-1])
     except:
         return redirect('/')
 
-    # print(GoogleMaps_API)
+
     context = {
         'location_a': location_a,
         'location_b': location_b,
