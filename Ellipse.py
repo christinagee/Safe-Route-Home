@@ -1,4 +1,5 @@
 import math
+import unittest
 class Ellipse(object):
 
     def __init__(self, x1, y1, x2, y2):
@@ -52,7 +53,7 @@ class Ellipse(object):
         """
         Checks whether a point is within ellipse.
         Is the total distance to the foci less than the distance
-        from a vertex to the foci?
+        from a vertex to the foci
         """
         dist = self.distToFocus1(x, y) + self.distToFocus2(x, y)
 
@@ -61,6 +62,51 @@ class Ellipse(object):
         else:
             return False
 
+
+class TestEllipse(unittest.TestCase):
+
+    def setUp(self):
+        """
+        Runs before unitTests.
+        Function sets up test Ellipse with foci at
+        (1, 0) and (2, 0) and eccentricity of 5
+        """
+        self.ell = Ellipse(1, 0, 2, 0)
+
+    def test_dist_btw_foci(self):
+        """
+        Function tests calcDistBetweenFocus Function
+        """
+
+        self.assertEqual(self.ell.calcDistBetweenFocus(), 1)
+
+    def test_dist_to_vertex(self):
+        """
+        Function tests calcDistToVertex Function
+        """
+        self.assertEqual(self.ell.calcDistToVertex(), math.sqrt(0.25+0.0625))
+
+    def test_dist_to_focus1(self):
+        """
+        Function tests distToFocus1
+        """
+
+        self.assertEqual(self.ell.distToFocus1(0, 0), 1)
+
+    def test_dist_to_focus2(self):
+        """
+        Function tests distToFocus2
+        """
+        self.assertEqual(self.ell.distToFocus2(0, 0), 2)
+
+
+    def test_is_within_ellipse(self):
+        """
+        Function tests isWithinEllipse
+        with point halfway btw focuses
+        """
+        self.assertTrue(self.ell.isWithinEllipse(1.5, 0))
+
+
 if __name__ == "__main__":
-    ellipse = Ellipse(1, 2, 4, 5)
-    print(ellipse.isWithinEllipse(3, 4))
+    unittest.main()

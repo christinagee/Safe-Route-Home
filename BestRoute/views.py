@@ -68,17 +68,18 @@ def crime_map(request):
     locB = geocoder.google(location_b)
     latlongA = locA.latlng
     latlongB = locB.latlng
-
-
+    print(latlongA, latlongB)
 
     #Create Ellipse from start and end location
     ell = Ellipse.Ellipse(latlongA[0], latlongA[1], latlongB[0], latlongB[1])
     jsonObject = []
     for crime in final_crime_array:
         #If the crime has a longitude and latitude
+
         if not (crime.latitude or crime.longitude):
             continue
         #If the crime is within the ellipse
+        print(ell.isWithinEllipse(crime.latitude, crime.longitude))
         if ell.isWithinEllipse(crime.latitude, crime.longitude):
             #Add to the json object
             json_entry = {
@@ -87,11 +88,9 @@ def crime_map(request):
                 'weight': 5,
                 'radius': 0.5,
             }
+            print(json_entry)
             jsonObject.append(json_entry)
-
-        # else:
-        #     print(False)
-    # print(len(jsonObject))
+    print(jsonObject)
 
     #Send to MapQuest API
     map_quest_api = Send_Data(latlongA, latlongB, jsonObject)
