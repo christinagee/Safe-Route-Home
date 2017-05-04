@@ -1,0 +1,8 @@
+body {
+  background: url('../crosswalk.jpg');
+  background-size: cover;
+}
+
+.jumbotron {
+  background-color: rgba(230, 230, 230, 0.95)
+}

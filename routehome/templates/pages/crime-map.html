@@ -1,32 +1,38 @@
 {% extends './index.html' %}
 
 {% block content %}
+{% load staticfiles%}
+
+<link rel="stylesheet" type="text/css" href="{% static './css/map.css' %}">
 
 <div class='container'>
   <div class='row'>
+    <div id='scroll'>
     <div class='col-sm-4'>
-      <div style="border:1px;width:400px;height:600px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;">
-      <ul>
-        <li>START: {{location_a}}</li>
-        <li> END: {{location_b}}</li>
-      </ul>
+      <div style="border:1px;width:360px;height:600px;overflow:scroll;overflow-y:scroll;overflow-x:hidden;">
+      <p>
+        <h3>START:</h3><h4> {{location_a}}</h4>
+        <h3>END:</h3><h4> {{location_b}}</h4>
+      </p>
         <hr>
       <ul>
         {% for route_dict in route %}
-        <p>Turn {{ forloop.counter }}</p>
-          <li><img src="{{ route_dict.iconUrl }}" alt=""></li>
-          <li>{{ route_dict.distance }} mi</li>
-          <li>{{ route_dict.narrative }}</li>
+        <p><b>Turn {{ forloop.counter }}</b></p>
+          <img src="{{ route_dict.iconUrl }}" alt="">
+          {{ route_dict.narrative }} <br>
+          {{ route_dict.distance }} mi
           <hr>
         {% endfor %}
       </ul>
     </div>
     </div>
+  </div>
     <div class='col-sm-8'>
       <style>
       #map {
-        width: 115%;
-        height: 100vh;
+        background-size: cover;
+        width: 125%;
+        height: 600px;
       }
           </style>
       <div id="map"></div>
@@ -55,7 +61,7 @@
         for (var i = 0; i < mapquest_waypts.length; i++) {
           waypts.push({
             location: mapquest_waypts[i],
-            stopover: true
+            stopover: true,
           });
         }
 

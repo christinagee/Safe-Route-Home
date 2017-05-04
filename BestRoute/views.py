@@ -62,7 +62,7 @@ def crime_map(request):
     latlongA = locA.latlng
     # print(latlongA)
     latlongB = locB.latlng
-    print(len(final_crime_array))
+    # print(len(final_crime_array))
     ell = Ellipse.Ellipse(latlongA[0], latlongA[1], latlongB[0], latlongB[1])
     jsonObject = []
     for crime in final_crime_array:
@@ -79,7 +79,7 @@ def crime_map(request):
             jsonObject.append(json_entry)
         # else:
         #     print(False)
-    print(len(jsonObject))
+    # print(len(jsonObject))
     map_quest_api = Send_Data(latlongA, latlongB, jsonObject)
     # print(map_quest_api)
     try:

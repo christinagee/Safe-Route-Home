@@ -44,20 +44,20 @@ class Send_Data:
         self.options['tryAvoidLinkIds'] = []
         if len(self.points) < 100:
             for crimept in self.points:
-                print(crimept)
+                # print(crimept)
                 try:
                     IDurl = 'http://www.mapquestapi.com/directions/v2/findlinkid?key=%s&lat=%f&lng=%f' % (
                         MapQuest_API, crimept['lat'], crimept['lng'])
-                    print('id url got')
+                #    print('id url got')
                     idData = requests.get(IDurl)
-                    print('got id data')
-                    print(idData.content)
+                #    print('got id data')
+                #    print(idData.content)
                     linkId = str(idData.json()['linkId'])
-                    print('got linkid')
+                #    print('got linkid')
                     self.options['tryAvoidLinkIds'].append(linkId)
-                    print('got it to append')
+                #    print('got it to append')
                 except Exception as e:
-                    print(e)
+                #    print(e)
                     continue
         self.options['avoidTimedConditions'] = False
         self.options['doReverseGeocode'] = True
@@ -70,12 +70,6 @@ class Send_Data:
         self.options['enhancedNarratives'] = False
         self.options['drivingStyle'] = 2
         self.options['highwayEfficiency'] = 21
-    # def Get_AvoidLinkIDs(self):
-    #     for crimept in self.points:
-    #         IDurl = 'http://www.mapquestapi.com/directions/v2/findlinkid?key=%s&lat=%f&lng=%f' % (
-    #             MapQuest_API, crimept['lat'], crimept['lng'])
-    #         json = requests.get(IDurl).json()
-    #         self.options['tryAvoidLinkIds'].append = json['linkId']
 
     def Get_Directions(self):
         # print(self.Data)
@@ -95,9 +89,9 @@ class Send_Data:
 
 if __name__ == '__main__':
     mydata = Send_Data("Clarendon Blvd, Arlington, VA","2400 S Glebe Rd, Arlington, VA",)
-    #response = requests.post(url, data=mydata.data)
-    #print (response.json())
-    #response = response.json()
+    # response = requests.post(url, data=mydata.data)
+    # print (response.json())
+    # response = response.json()
     print(mydata.response['route']['legs'])
 
     print(mydata.data)

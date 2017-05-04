@@ -1,10 +1,12 @@
 {% extends './index.html' %}
 
 {% block content %}
+{% load staticfiles%}
+
   <div class='container'>
     <div class='col-sm-12'>
 
-<h3>User Instructions</h3>
+<h2>User Instructions</h2>
   <p> You can find our instructions on how to download our app by visiting our <a href="https://safe-route-home.herokuapp.com/readme/">ReadMe</a>
     or by following the steps below.</p>
   <ol>
@@ -17,8 +19,102 @@
   </ol>
   <p> Our central source of code can be found in the views.py file.
 <br>
-<h3>Implementation Architecture</h3>
+<h2>Implementation Architecture</h2>
+<h3>Ethical Concerns</h3><br>
+<p>
+  Our original idea for this project was a service to help people find safe
+   walking routes home from wherever they are. We quickly realized that
+    safe is a very loaded word. It means different things to different
+     people. In addition, crime can have social and ethical biases to it.
+      For instance, though they are similar offenses and both drug related,
+       cocaine and crack abuse are socially divided. We wanted to avoid these
+        ethical issues and tried to specifically choose our parameters to those
+         that have an impact on the traveler.
+</p>
+<h3>Design Decisions & Constraints</h3><br>
+<p>
+  Early on we had to decide the structure of our web app and the tools we were
+  going to use to get it working. We considered Google Maps, Waze, and MapQuest
+  APIs for geolocation and mapping. We chose to use Mapquest for routing because
+  only MapQuest is able to create “avoid points” and optimize a route based on
+  avoiding those points. <br><br>
 
+  Additionally, when we started working on this project we initially envisioned
+  having real-time crime and event data populate a database and be used with our
+  MapQuest API. We soon learned out how difficult it is just to upload and store
+  a database on a SQLite database and would not have the time to create a
+  real-time crime and events. Thus, our web application only uses 150,000 crimes
+  from July 2012 to February 2017.<br><br>
+  Another decision we made early on in development was the decision to use Django
+  instead of Flask for building the app. We had a reliable source for help with
+  Django in some friends of ours and at the time it made more sense for working
+  with the database files that we created.<br><br>
+
+  Initially, we planned to have our MVP as a list of direction. We felt that
+  our users needed to see a visual map, so we were able to surpass our MVP goal
+  by integrating a Google Maps API.  The reason we used both is because Mapquest
+  allows us to get directions that avoid certain areas, whereas Google Maps does
+  not. And Mapquest only allows us to show a static map, not an interactive one.
+  Thus, we took the MapQuest directions that included the avoid points in its optimal
+   direction map and sent those directions to a Google Maps API for a visual display.
+
+</p>
+
+
+<h3>Divide and Conquer</h3><br>
+<p>
+  This was a big project, so we decided to divide the work up. Each of us took
+   on a different part of the app:
+<br><br>
+  <b>Christina</b>: Parsed through the Boston Crime dataset to remove any
+   columns that were not relevant. Set up Django to define every field in our
+    dataset to create a schema database structure in SQL. The SQLite database
+     stores our data so that we can create queries. Helped to work on the front
+      end of the website, set up the web app deployment on Heroku and got the
+       MapQuest API to output directions for the MVP prototype. <br><br>
+   <b>Jeff</b>: Created object to sift through dataset and pull out points
+    of interest. Takes the form of an ellipse around the start and end
+     locations of the route. Any points within ellipse get used and are
+      accounted for. Points outside of the ellipse do not. Parsed through
+       JSON file to grab route information. Also PMing this was pretty cool.<br> <br>
+
+  <b> Frankie</b> : Created the interphase with the MapQuest API. This
+   object contains methods that create the data set of options and
+    parameters of the directions the user is asking for, this includes
+     start and end location as well as long/lat points that represent
+      historical locations where crimes were committed. This data set is
+       then sent to MapQuest as a request. The response that contains turn
+        by turn directions, is then sorted preliminarily and then pickled
+         (saved to a new file).<br><br>
+
+   <b> Alisha</b> : Worked on the webpage design and integrating the
+    code to ensure that all the components showed up on the home, map,
+     and informational pages. When the user selects avoid points, and
+      enters start and end locations, we store that information and
+       filtered through our crime database based off of what they selected.
+        Then, the start and end locations are geocoded and sent to the
+         Mapquest and Google Maps API. The map page appears with a scroll
+          bar that shows the directions from our mapquest api, and Google
+           map that shows the route that avoids points within our ellipse.<br>
+</p>
+
+<h3>Integration</h3>
+<p>
+  We then integrated all of our parts together in the file views.py.
+  Here is what happens step by step:<br><br>
+  1. The crime and traffic data are pulled into the program <br>
+  2. The data is sifted, looking for points that are specifically
+   around the route <br>
+  3. The data is sent through the MapQuest API as points to avoid <br>
+  4. The API returns a series of directions from Point A to point B <br>
+  5. Those directions are sent to the website where they are displayed <br><br>
+
+  The data is displayed with the Google API on a map. Along with the route,
+   the relevant crime points are also displayed. <br>
+  (Fun Fact: The ellipse that is drawn around the start and end points is
+   visible in the crime data)
+
+ </p>
 <!--
 
 <br>
@@ -41,7 +137,7 @@ Our view.py file is what the user is able to see from the front end. It has 2 vi
     shared the database on github. For production, we converted the db.SQLite3 data base
     and pushed it to Heroku. -->
 
-    We pulled from the Boston Crime data set located on the boston.gov website. We were
+    <!-- We pulled from the Boston Crime data set located on the boston.gov website. We were
     fortunate that the dataset was clean so we did not have to format the data further.
     <br>
     <br>
@@ -55,16 +151,59 @@ Our view.py file is what the user is able to see from the front end. It has 2 vi
     <br>
     Map Quest then returns to Django another JSON object which contains various navigation
     information and step by step directions. We then parsed through that data and iterate over it
-    into our HTML template.
+    into our HTML template. -->
 
 
 <h3>Results and Future Work</h3>
 <br>
 The end result of this project is this website! If you navigate back to the landing page you can
-input directions and categories you care about, and get directions. 
-<h3>Project Evolution</h3>
+input directions and categories you care about, and get directions.<br>
+Here is an image of what the landing page should look like!<br>
+
+<div class='row'>
+  <img src="../static/Landingpage.png" width="600" height="340" hspace='20' margin='15px'>
+</div>
 <br>
 
+<br><br>
+
+<div class='row'>
+  <img src="../static/avoidresults.png" width="600" height="340" hspace='20' margin='15px'>
+</div>
+
+<h3>Project Evolution</h3><br>
+MVP Page with Four Requirements:<br><br>
+
+<div class='row'>
+  <img src="../static/threerequirements.png" width="600" height="340" hspace='20' margin='15px'>
+</div>
 <br>
-<h3> Attribution <h3>
+<br>
+Initial Web Front:<br><br>
+<div class='row'>
+  <img src="../static/initialwebfront.png" width="600" height="340" hspace='20' margin='15px'>
+</div>
+<br>
+Printing Out Mapquest Directions:<br><br>
+<div class='row'>
+  <img src="../static/mapquestdirections.png" width="600" height="340" hspace='20' margin='15px'>
+</div>
+<br>
+Second Iteration of Web Front:<br><br>
+<div class='row'>
+  <img src="../static/googlemap2.PNG" width="600" height="340" hspace='20' margin='15px'>
+</div>
+<br>
+Map Page with Google Maps and Directions:<br><br>
+<div class='row'>
+  <img src="../static/googlemaps1.PNG" width="600" height="340" hspace='20' margin='15px'>
+</div>
+<br>
+
+Printing Avoid Points As Well As Directions:<br><br>
+<div class='row'>
+  <img src="../static/plotavoid.png" width="600" height="340" hspace='20' margin='15px'>
+</div>
+<br>
+<br>
 {% endblock %}

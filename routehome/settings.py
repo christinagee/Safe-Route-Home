@@ -149,6 +149,6 @@ MapQuest_API = str(os.environ.get('MapQuest_API'))
 Google_JS_API = str(os.environ.get('Google_JS_API'))
 
 try:
-    from API_Keys import GoogleMaps_API, MapQuest_API
+    from API_Keys import GoogleMaps_API, MapQuest_API, Google_JS_API
 except:
     pass
