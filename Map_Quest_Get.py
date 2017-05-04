@@ -37,11 +37,28 @@ class Send_Data:
         self.Options()
         self.data['options'] = self.options
         self.data['routeControlPointCollection'] = self.points
-        print(self.data)
+        # print(self.points)
 
     def Options(self):
         self.options = {}
-        self.options['avoids'] = []
+        self.options['tryAvoidLinkIds'] = []
+        if len(self.points) < 100:
+            for crimept in self.points:
+                print(crimept)
+                try:
+                    IDurl = 'http://www.mapquestapi.com/directions/v2/findlinkid?key=%s&lat=%f&lng=%f' % (
+                        MapQuest_API, crimept['lat'], crimept['lng'])
+                    print('id url got')
+                    idData = requests.get(IDurl)
+                    print('got id data')
+                    print(idData.content)
+                    linkId = str(idData.json()['linkId'])
+                    print('got linkid')
+                    self.options['tryAvoidLinkIds'].append(linkId)
+                    print('got it to append')
+                except Exception as e:
+                    print(e)
+                    continue
         self.options['avoidTimedConditions'] = False
         self.options['doReverseGeocode'] = True
         self.options['shapeFormat'] = 'raw'
@@ -53,15 +70,21 @@ class Send_Data:
         self.options['enhancedNarratives'] = False
         self.options['drivingStyle'] = 2
         self.options['highwayEfficiency'] = 21
-
+    # def Get_AvoidLinkIDs(self):
+    #     for crimept in self.points:
+    #         IDurl = 'http://www.mapquestapi.com/directions/v2/findlinkid?key=%s&lat=%f&lng=%f' % (
+    #             MapQuest_API, crimept['lat'], crimept['lng'])
+    #         json = requests.get(IDurl).json()
+    #         self.options['tryAvoidLinkIds'].append = json['linkId']
 
     def Get_Directions(self):
+        # print(self.Data)
         url='http://www.mapquestapi.com/directions/v2/route?key=%s' % (MapQuest_API)
         self.response = requests.post(url, data=self.data)
         # Handle 500 Erros with pytho's request api
 
         self.response = self.response.json()
-        print(self.response)
+        # print(self.response)
         return self.response
 
     def Store_Directions(self):

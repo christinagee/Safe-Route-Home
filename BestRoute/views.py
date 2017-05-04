@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from BestRoute.models import CrimeDataPoint
 from Map_Quest_Get import Send_Data
 from django.core.management import execute_from_command_line
-from routehome.settings import GoogleMaps_API, MapQuest_API
+from routehome.settings import GoogleMaps_API, MapQuest_API, Google_JS_API
 
 # import panda or google maps api here after you pip install it
 # do not forget to add it to INSTALLED_APPS in RouteHome.settings
@@ -62,29 +62,29 @@ def crime_map(request):
     latlongA = locA.latlng
     # print(latlongA)
     latlongB = locB.latlng
-    # print(latlongB)
+    print(len(final_crime_array))
     ell = Ellipse.Ellipse(latlongA[0], latlongA[1], latlongB[0], latlongB[1])
     jsonObject = []
     for crime in final_crime_array:
         if not (crime.latitude or crime.longitude):
             continue
-        if ell.isWithinEllipse(crime.latitude, crime.longitude):
+        if ell.isWithinEllipse(crime.latitude, crime.longitude): #or True:
             # print(True)
             json_entry = {
                 'lat': crime.latitude,
-                'long': crime.longitude,
-                'weight': 1,
-                'radius': 0.05
+                'lng': crime.longitude,
+                'weight': 5,
+                'radius': 0.5,
             }
             jsonObject.append(json_entry)
         # else:
         #     print(False)
-    # print(jsonObject)
-
+    print(len(jsonObject))
     map_quest_api = Send_Data(latlongA, latlongB, jsonObject)
     # print(map_quest_api)
     try:
         route = map_quest_api.Get_Directions()['route']['legs'][0]['maneuvers']
+        mapquest_waypts = json.dumps([maneuver['startPoint'] for maneuver in route][1:-1])
     except:
         return redirect('/')
 
@@ -93,7 +93,10 @@ def crime_map(request):
         'location_a': location_a,
         'location_b': location_b,
         'route': route,
-        'googleAPI': GoogleMaps_API
+        'mapquest_waypts': mapquest_waypts,
+        'googleAPI': GoogleMaps_API,
+        'googleJS_API': Google_JS_API,
+        'jsonObject': jsonObject,
     }
     # This renders our the crime-map.html file with all of the defined context
     # variables

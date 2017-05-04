@@ -16,7 +16,7 @@ class Ellipse(object):
         self.focus1 = (x1, y1)
         self.focus2 = (x2, y2)
         self.center = ((x1+x2)/2, (y1 + y2)/2)
-        self.eccentricity = 0.5
+        self.eccentricity = 5
         self.angle = math.atan((self.focus2[1] - self.focus1[1])/(self.focus2[0] - self.focus1[0]))
         self.semiminor = (self.calcDistBetweenFocus()/2)/self.eccentricity
         self.edgeDist = 2*self.calcDistToVertex()
